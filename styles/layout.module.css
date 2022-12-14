@@ -1,0 +1,15 @@
+.dashRow {
+  display: flex;
+  justify-content: space-between;
+  min-height: 86vh;
+  align-items: stretch;
+}
+.sidebarNav {
+  display: flex;
+  /* align-items: stretch; default */
+}
+
+.centerDiv {
+  padding-top: 20px;
+  box-shadow: 1px 1px 8px 5px lavender;
+}

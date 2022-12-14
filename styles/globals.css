@@ -1,26 +1,426 @@
-html,
+@import url("https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap");
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Rubik", sans-serif;
+  font-family: "Slabo 27px", serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.form-control, select, button{
+  border-radius: 0!important;
 }
 
-* {
-  box-sizing: border-box;
+
+.task-table{
+  background: white;
+}
+.task-table tr:hover{
+box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+cursor: pointer;
+}
+.task-table :nth-child(1) tr:hover{
+box-shadow: none;
+cursor: default;
+}
+/* ------------- 
+FILE UPLOAD
+-------------------*/
+#form-file-upload {
+  height: 6rem;
+  width: 30rem;
+  max-width: 100%;
+  text-align: center;
+  position: relative;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+#input-file-upload {
+  display: none;
+}
+
+#label-file-upload {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  border-radius: .375rem;
+  border-style: dashed;
+  padding-bottom: 1rem;
+  /* border: 2px dotted lightgray; */
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+  /* border: 3px dashed #eeeeee;
+  background-color: #fafafa;
+  color: #bdbdbd; */
+}
+
+.upload-button {
+  color: #0dcaf0;
+}
+
+.upload-button:hover {
+  background: white;
+}
+#label-file-upload.drag-active {
+  border: 2px dashed #0dcaf0;
+}
+#drag-file-element {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+.upload-file-preview {
+  /* box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12);
+  */
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  display: flex;
+  padding: 0.3rem 0.6rem 0.3rem;
+  margin-bottom: 0.4rem;
+  justify-content: space-between;
+  border-bottom: 2px solid #0dcaf0;
+}
+
+/* END OF FILE UPLOAD */
+
+/*-----------------------
+SPINNER
+-------------------------*/
+
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #000 transparent #555 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  body {
-    color: white;
-    background: black;
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------------
+BOOTSTRAP BTN & TEXT
+------------------------ */
+.btn {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 2px;
+  box-shadow: 0 -2px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 -2px rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-shadow: 0 -2px rgba(0, 0, 0, 0.1) inset;
+}
+.btn-checked {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+}
+/* danger */
+.btn-danger {
+  background: #d81b60;
+  border: #d81b60;
+}
+.text-danger {
+  color: #d81b60 !important;
+}
+/* primary */
+.btn-primary {
+  border: #4dabff;
+  background: #4dabff;
+}
+.text-primary {
+  color: #4dabff !important;
+}
+.bg-primary {
+  background: #4dabff;
+}
+.form-check-input:checked {
+  background-color: #4dabff;
+  border-color: #4dabff;
+}
+/* pagination btn s */
+.page-item.active .page-link {
+  background-color: #4dabff;
+  border-color: #4dabff;
+}
+/* info */
+.btn-info {
+  border: #4dabff;
+  background: #4dabff;
+}
+.text-info {
+  color: #4dabff !important;
+}
+.bg-info {
+  background: #4dabff;
+}
+/* secondary */
+.btn-secondary {
+  background: #ececec;
+  color: #464a4e;
+  border: none;
+}
+/* ------------------------
+END OF BOOTSTRAP BTN & TEXT
+------------------------ */
+
+.home-bg {
+  background: linear-gradient(
+    to right,
+    rgba(182, 221, 237, 1) 0%,
+    rgba(34, 181, 226, 1) 0%,
+    rgba(77, 172, 255, 1) 22%,
+    rgba(77, 172, 255, 1) 36%,
+    rgba(113, 205, 239, 1) 61%,
+    rgba(113, 205, 239, 1) 88%
+  );
+  background-size: cover;
+  color: white;
+}
+
+.main-nav {
+  background: linear-gradient(
+    to right,
+    rgba(182, 221, 237, 1) 0%,
+    rgba(34, 181, 226, 1) 0%,
+    rgba(77, 172, 255, 1) 22%,
+    rgba(77, 172, 255, 1) 36%,
+    rgba(113, 205, 239, 1) 61%,
+    rgba(113, 205, 239, 1) 88%
+  );
+  display: flex;
+  justify-content: space-between;
+}
+
+.writerHeader {
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1), -1px 1px 2px rgba(0, 0, 0, 0);
+}
+
+.homeFormDiv {
+  padding: 15px;
+  background: #4dabff;
+  box-shadow: 1px 1px 10px 4px #4e98db;
+}
+
+.homeFormBtn {
+  background: white !important;
+  color: #4dabff !important;
+  font-weight: bold !important;
+  border-radius: 7px !important;
+  border: 2px solid #4dabff !important;
+  padding: 5px 20px 5px 20px;
+}
+.homeFormBtn:hover {
+  border: 2px solid white !important;
+  background: #4dabff !important;
+  color: white !important;
+}
+
+.chatBox {
+  height: 315px;
+}
+
+.footer {
+  left: 0;
+  bottom: 0;
+  position: relative;
+  background: rgba(19, 35, 47, 0.8);
+}
+
+/* styling tabs */
+#myTabs .nav-link {
+  color: #495057 !important;
+}
+
+.alertBOX {
+  padding: 10px !important;
+  text-shadow: 0 1px 0 #ffffff;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* homepage slider */
+.sliderID {
+  height: 365px;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+a,
+a:hover,
+a:focus {
+  color: inherit !important;
+  text-decoration: none !important;
+  transition: all 0.3s;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+/*for changing color active */
+.sidebar-active {
+  background: #007bff;
+}
+/*for active collapse menu items*/
+.sidebar-active2 {
+  /*border-right: 3px solid #D81B60;
+background: #6d7fcc;*/
+  background: rgba(19, 35, 47, 0.1);
+}
+/* .counterColor{
+color:white;
+} */
+
+#sidebar {
+  min-width: 250px !important;
+  max-width: 250px !important;
+  background: #4dabff;
+  /* background #7386D5;#1DC8CD; */
+  color: #fff;
+  transition: all 0.3s;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+  font-size: 15px;
+  padding: 20px;
+  padding-top: 22px;
+  padding-bottom: 30px;
+  /* background #6d7fcc; */
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+  padding-top: 0px;
+  /* border-top 1px dotted white; */
+}
+
+#sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  /* border-bottom 1px dotted white; */
+  padding: 10px;
+  font-size: 1em;
+  /*font-size: 1.09em;*/
+  display: block;
+}
+/*add n format border-rev top last border*/
+#sidebar ul li {
+  border-bottom: 2px solid rgba(0, 123, 255, 0.4);
+  border-top: 2px solid rgba(113, 205, 239, 1);
+}
+#sidebar ul li:first-child {
+  border-top: none;
+}
+#sidebar ul li:last-child {
+  border-bottom: none;
+}
+
+#sidebar ul li a:hover {
+  color: white;
+  background-color: #007bff;
+}
+
+#sidebar ul li.active > a,
+a[aria-expanded="true"] {
+  color: #fff;
+  /* background#4dabff; */
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+#sidebar .dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+/*seperate hover effect for dropdown items*/
+#sidebar ul ul a:hover {
+  background: rgba(19, 35, 47, 0.4);
+}
+/*remove sec border and add diff from drop down li*/
+#sidebar ul ul li {
+  border-top: none;
+  border-bottom: 1px solid rgba(19, 35, 47, 0.4);
+}
+#sidebar ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #6d7fcc;
+  /* b84d45;    */
+  background: rgba(19, 35, 47, 0.3);
+  color: white;
+}
+
+a.download {
+  background: #fff;
+  color: #7386d5;
+}
+
+a.article,
+a.article:hover {
+  background: #d81b60 !important;
+  color: #fff !important;
+}
+
+/* ---------------------------------------------------
+  CONTENT STYLE
+----------------------------------------------------- */
+/* ---------------------------------------------------
+  MEDIAQUERIESmax-width: 768px)
+----------------------------------------------------- */
+/* bootstrap breakpoints
+xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px */
+@media (max-width: 992px) {
+  #sidebar {
+    margin-left: -250px;
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+  }
+
+  .sliderID {
+    height: 425px;
   }
 }
