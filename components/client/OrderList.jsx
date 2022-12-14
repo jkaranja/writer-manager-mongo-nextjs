@@ -84,7 +84,7 @@ const OrderList = () => {
             </Form.Select>
           </InputGroup>
         </Col>
-        <Col>
+        <Col>  
           <Button
             variant="danger border border-danger"
             size="sm"
