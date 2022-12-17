@@ -1,21 +1,19 @@
 //checked
 //starred
 //topic etc
-const mongoose = require("mongoose");
+import  mongoose from "mongoose";
 //to accept anything leave {} or '' or {type: Mixed}
-const orderSchema = mongoose.Schema(
+const threadSchema = new mongoose.Schema(
   {
-    order: {
+    task: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Order",
-    },
-    cWriter: { type: String, default: "" },
-    wClient: { type: String, default: "writer" },
-    message: { type: String, default: "" },   
+      ref: "Task",
+    },    
+    threadMessage: { type: String, default: "" },   
     threadFiles: { type: [], default: [] },
     read: { type: Boolean, default: false },
-    writerComment: { type: String, default: "" },    
+    sender: { type: String, default: "" },    
     isChecked: { type: Boolean, default: false },
   },
   { timestamps: true }
@@ -27,4 +25,4 @@ const orderSchema = mongoose.Schema(
 //pending > pending//danger
 //
 
-module.exports = mongoose.model("Order", orderSchema);
+export default mongoose.models.Thread || mongoose.model("Thread", threadSchema);

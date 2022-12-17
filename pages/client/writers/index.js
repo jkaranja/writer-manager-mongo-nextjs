@@ -297,7 +297,7 @@ const ManageWriters = () => {
               <tbody>
                 {currentItems.map((writer, id) => {
                   return (
-                    <tr key={id}>
+                    <tr key={writer._id}>
                       <td>
                         <Form.Check type="checkbox" />
                       </td>

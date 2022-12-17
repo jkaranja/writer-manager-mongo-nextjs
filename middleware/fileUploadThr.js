@@ -3,13 +3,13 @@ const multer = require('multer');
 
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'uploads');
+      cb(null, "uploads_thr");
     },    
     filename:  (req, file, cb) => { 
       ////if not set/multer generates a random filename with no extension
       // file name can't contain:  ?*: /\"<>| 
       //set file name by first checking if it exist      
-      fs.stat(`uploads/${file.originalname}`, (err, stat)=> {
+      fs.stat(`uploads_thr/${file.originalname}`, (err, stat)=> {
           if (err==null) {
         // The check succeeded//file exist//add date to rename
       //    //below, replaces : with - ///g=global..apply to all matches not just the first match 
@@ -45,12 +45,13 @@ const multerFilter = (req, file, cb) => {
     // }
   };
 
-  //filter/limit is optional
-  module.exports = multer({
+   //filter/limit is optional
+  export default multer({
     storage: multerStorage,
     // limits: {fileSize: 1000000, files:1},
     // fileFilter: multerFilter,
   });
+
 
 
 

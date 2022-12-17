@@ -3,14 +3,14 @@ import connectDB from "../../../../config/db";
 
 import sendEmail from "../../../../utils/emailSender";
 
-import writerAccountModel from "../../../../models/writerAccountModel";
+import Writer from "../../../../models/writerAccountModel";
 
 import errorHandler, { notFound } from "../../../../middleware/errorMiddleware";
 import { protectedClient } from "../../../../middleware/authMiddleware";
 
 import uploadInst from "../../../../middleware/fileUploadInst";
-import taskModel from "../../../../models/taskModel";
-import multer from "multer";
+import Task from "../../../../models/taskModel";
+
 
 const handler = nc({
   onError: errorHandler,
@@ -53,9 +53,9 @@ handler
         throw new Error("Failed! Fill required fields and try again.");
       }
 
-      const task = await taskModel.create({
+      const task = await Task.create({
         wClient: id,
-        [cWriter === "pool" ? "xW" : "cWriter"]: cWriter,
+        [cWriter !== "pool" && "cWriter"]: cWriter,
         title,
         budget,
         deadline,
@@ -71,7 +71,7 @@ handler
       /**-----------------------
          * EMAIL NOTIFICATIONS
          --------------------------*/
-      const writers = await writerAccountModel.find({ wClient: id });
+      const writers = await Writer.find({ wClient: id });
       //pool=>all client's writers
       if (cWriter === "pool") {      
 
@@ -104,14 +104,17 @@ handler
 
 export default handler;
 //to consume req.body as stream, disable body parsing. By default, Next.js automatically parses the API request body.
-
+//multer needs the data sent untouched/parsed/as streams/ so it parses the multipart data/ and upload files and forward the req by next()
+//note that if the headers content-type is not multipart/form-data, multer will skip, you have disabled next parsing to false so req.body will be undefined, i.e
+//the data will not be parsed at all
 //in express, we are only parsing content-type app/json and x-www-form-urlencoded
 //using: app.use(express.json());//app.use(express.urlencoded({ extended: true }));
 //in NEXTJS, it's body parser parses all types of data streams in the body of req
-//data in the req is sent as streams and has to be parsed req.on("data", cb) into req.body object
+//data in the req is sent as streams/parts/not whole and has to be parsed req.on("data", cb) into req.body object
+//parsing means the middleware receives parts of data as streams and as data comes in, it keeps putting the parts together into actual usable js object/req.body
 //headers can be access at req.headers // no parsing//not sent as stream
 export const config = {
   api: {
-    bodyParser: false, // Disallow body parsing, consume as stream
+    bodyParser: false, // Disallow body parsing, multer to consume as stream
   },
 };

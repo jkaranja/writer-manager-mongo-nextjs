@@ -3,3 +3,14 @@
 //add passport
 
 //add typescript//types
+
+//fetch emails from inbox
+https://dev.to/akinmyde/reading-email-data-with-node-js-bjf
+
+https://www.npmjs.com/package/imap
+
+https://excellencetechnologies.in/blog/receive-and-send-email-from-email-server-with-node-js/
+
+whatsapp
+https://www.npmjs.com/package/whatsapp-api-js
+https://developers.facebook.com/blog/post/2022/10/31/sending-messages-with-whatsapp-in-your-nodejs-application/

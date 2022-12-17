@@ -15,7 +15,7 @@ import nc from "next-connect";
 //in routes, use try catch and pass an error to next(error)//no need
 const handler = nc({
   onError: errorHandler, //pass your error handler function here with same params as express
-  onNoMatch: notFound, //your 404 route not found//eg no method matched
+  onNoMatch: notFound, //path matched but no method matched//if no path matched, 404 on frontend
 });
 ///you can chain like nc().post().get//or handler.post().get() //OR call handler for every mtd. handler.get() handler.post
 

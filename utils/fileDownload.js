@@ -4,7 +4,7 @@
 export const fileDownload = async (parts, fileName, token) => {
   //change this before build as api/....
   window.open(
-    `api/download?parts=${parts}&fileName=${encodeURIComponent(
+    `/api/commonAPI/fileDownloadAPI/?parts=${parts}&fileName=${encodeURIComponent(
       fileName
     )}&token=${token}`,
     "_self"

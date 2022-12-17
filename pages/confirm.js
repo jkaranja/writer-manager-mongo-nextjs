@@ -82,7 +82,7 @@ export const getServerSideProps = async (context) => {
   let result;
   try {
     const { data } = await axios.post(
-      "http://localhost:3000/api/client-api/auth/confirm",
+      "http://localhost:3000/api/clientAPI/auth/confirm",
       {
         id,
         key,

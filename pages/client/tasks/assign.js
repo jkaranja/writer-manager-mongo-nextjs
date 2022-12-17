@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { getWriters } from "../writers/manageService";
 import setToast from "../../../utils/setToast";
+import { clientAuthSelect } from "../../../redux/features/client/clientAuthSlice";
 
 const Assign = () => {
   const ref = useRef();
@@ -36,7 +37,7 @@ const Assign = () => {
   const {
     client,
     client: { token },
-  } = useSelector((state) => state.clientAuth);
+  } = useSelector(clientAuthSelect);
   //get destructured state
   const { writers } = useSelector(writersSelect);
 
@@ -66,7 +67,9 @@ const Assign = () => {
   const clientX = axios.create({
     baseURL: "",
     headers: {
-      "Content-Type": "multipart/form-data",
+      "Content-Type": "multipart/form-data", //don't forget to change this when using next.js, else req.body/files = undefined since
+      //multer will only accept multipart content type data stream, (parses data, upload files & forward req),  so it skips, then you disable parsing in next config = false, so the req is not parsed at no stage.
+      //in express, it will work just// express.json() //will not parse the data if it has files/// also sets the correct headers for multer//but you should always set the correct headers
       Authorization: `Bearer ${token}`,
     },
   });
@@ -145,7 +148,7 @@ const Assign = () => {
         { ...uploadProgress }
       );
 
-      setToast("success", "Task assigned. Find task under 'Current tasks'");
+      setToast("success", "Task assigned. Find task under 'Current tasks'.");
     } catch (error) {
       setToast("error", error);
     }
@@ -243,10 +246,7 @@ const Assign = () => {
                     ) : (
                       writers.map((writer, i) => {
                         return (
-                          <option
-                            key={i}
-                            value={writer._id}
-                          >
+                          <option key={i} value={writer._id}>
                             {writer.username}
                           </option>
                         );

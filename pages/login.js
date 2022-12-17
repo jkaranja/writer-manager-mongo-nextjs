@@ -62,7 +62,7 @@ const Login = () => {
     try {
       setToast("loading", "Logging in...");
 
-      const { data } = await client.post("login", inputs);
+      const { data } = await client.post("commonAPI/login", inputs);
 
       //then login to the right dash
       if (data._userType === "client") {

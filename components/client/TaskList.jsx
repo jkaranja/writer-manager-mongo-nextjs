@@ -12,9 +12,10 @@ import { BsBoxArrowRight } from "react-icons/bs";
 import { ImCheckboxChecked, ImCheckmark, ImCross } from "react-icons/im";
 
 import { RiStarLine } from "react-icons/ri";
-import OrderItem from "./OrderItem";
+import OrderItem from "./TaskItem";
 import style from "../../styles/order.module.css";
 import Link from "next/link";
+import MainPagination from "../common/MainPagination";
 
 
 
@@ -84,7 +85,7 @@ const OrderList = () => {
             </Form.Select>
           </InputGroup>
         </Col>
-        <Col>  
+        <Col>
           <Button
             variant="danger border border-danger"
             size="sm"
@@ -147,6 +148,7 @@ const OrderList = () => {
             </tr>
           </tbody>
         </Table>
+        
       </Row>
       {/* <OrderItem /> */}
     </Row>
